@@ -96,6 +96,8 @@ function getPasswordOptions() {
   // Alerts to invalid input could be given by alert box or boxes.
   // Valid input does not explicitly need confirmation according ot the brief. However a "You have selected <parameters> is this OK" confirm box could be added.
 
+  // Could become a get and set password options, setting up the length and character set options/master array
+
 }
 
 // Function for getting a random element from an array
@@ -108,9 +110,9 @@ function getRandom(arr) {
 // Function to generate password with user input
 function generatePassword() {
   // Uses the parameters specified to generate the password.
-  // Build master array of allowable characters from the selected arrays.
+  // Build master array of allowable characters from the selected arrays. Or should this be done when getting the options from the user. Get and set options...
   // Call the getRandom function n = password length times and put the results in a string.
-  // Or call getRandom functin passing an additional character to allow it to iterate internally and return the whole string
+  // Or call getRandom function passing an additional character to allow it to iterate internally and return the whole string
 }
 
 // Get references to the #generate element

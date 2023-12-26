@@ -113,6 +113,7 @@ function generatePassword() {
   // Build master array of allowable characters from the selected arrays. Or should this be done when getting the options from the user. Get and set options...
   // Call the getRandom function n = password length times and put the results in a string.
   // Or call getRandom function passing an additional character to allow it to iterate internally and return the whole string
+  // Another possible method could be to not concatenate the four character arrays, but pick directly from them, calculating which array and position to pick from by using array length offsets to transform from the pick value (zero to culmulative array length of the selected arrays) to a corresponding local value in the correct array. A bit tricksy and would need careful testing to avoid off by on errors.
 }
 
 // Get references to the #generate element

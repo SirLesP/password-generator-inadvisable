@@ -28,19 +28,31 @@ var combinedArray = lowerCasedCharacters ;
 function getPasswordOptions() {
 
 
-  length = window.prompt("How long?", "Enter a number between 8 and 128");
-  console.log(length)
-  if (length == null) return;
+  length = window.prompt("How long do you want your password to be?", "Enter a number between 8 and 128");
+  console.log(length);
+  if (length === "") console.log("empty string " + n); // The third value...
+  if (length === null) console.log("null " + n);
+
+
+  // Check input validity - null on escape, string on input or default and OK . What on empty string?? Looks like a valid, but empty, string...
+
+  if (length == null) console.log("null"); // Accidentally generates password with previous settings if valid
+   // ! Bashed very roughly into shape! Doesn't do anything too stupid but not quite right - doesn't prompt for a numeric input if a string put in, just returns to start. Cancel, null string and non-null string that won't parse to number just fail silently, offering a restart. Out of range numbers do get the range prompt and a new entry box.
+
   n = parseInt(length);
-  // if (n == NaN) return;
+  console.log(n)
+
+  // if (n != 8) console.log("NAN or not " + n);
   // if (length = null) return; // Not really what I want...
  
-  console.log(n)
-  if ((n <=7 ) || (n >= 129) || (n == NaN)) { alert("Please enter a number between 8 and 128.") ; getPasswordOptions()};
+  // console.log(n)
+  if ((n <=7 ) || (n >= 129)) { alert("Please enter a number between 8 and 128.") ; getPasswordOptions()};
 
 
 // Now generates password even if cancel button pressed.
 // Inelegant, gets stuck with alerts showing in a loop until a valid entry, can't be simply cancelled after wrong entry. Also shows spurious values (previous pwd) or null sometimes.
+
+// Need to pseudocode again... paying particualr attention to 
 
 
 
@@ -85,7 +97,7 @@ function getRandomFrom(arr,n) {
 // Function to generate password with user input
 function generatePassword() {
   // Get parameters from user
-getPasswordOptions()
+if (getPasswordOptions() == null) return;
   // Build master array of allowable characters from the selected arrays.
   // Call the getRandomFrom(masterArray, n), returning a password string of length n.
 
@@ -98,14 +110,15 @@ getPasswordOptions()
 var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input (surely output?)
-function writePassword() {
+function writePassword() { // better called start password process or something - not really just a write
   generatePassword()
   var password = getRandomFrom(combinedArray, n)         // generatePassword();
   // ? test code var password = "Hello"
  var passwordText = document.querySelector('#password');
 
  passwordText.value = password;
+ password = ""
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener('click', writePassword);
+generateBtn.addEventListener('click', writePassword); // Javascript triggered here,and only here.

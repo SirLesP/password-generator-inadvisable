@@ -17,48 +17,28 @@ var upperCasedCharacters = [
   'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
 
+// Variables added by me 
+
 var password = ""
 let n = 8 // default minimum length for password 
 let combinedArray = [] ;
-
-// Variables added by me 
 
 
 // Function to prompt user for password options
 function getPasswordOptions() {
 
-
   length = window.prompt("How long do you want your password to be?", "Enter a number between 8 and 128");
-  console.log(length);
-  if (length === "") console.log("empty string " + n); // The third value...
-  if (length === null) console.log("null " + n);
 
-
+  // if (length === "") console.log("empty string " + n); // The third value...
+  // if (length === null) console.log("null " + n); 
   // Check input validity - null on escape, string on input or default and OK . What on empty string?? Looks like a valid, but empty, string...
+  // if (length == null) console.log("null");
 
-  if (length == null) console.log("null");
-
-   // ! Bashed very roughly into shape! Doesn't do anything too stupid but not quite right - doesn't prompt for a numeric input if a string put in, just returns to start. Cancel, null string and non-null string that won't parse to number just fail silently, offering a restart. Out of range numbers do get the range prompt and a new entry box. Might look at dropping the test for empty string as that should surely come back as Nan but I'm having trouble with logical operators using that. So on to the other imputs, which are binary choices in a series of four alerts or a set of four boxes in one alert
+   // ! Bashed very roughly into shape! Doesn't do anything too stupid but not quite right - doesn't prompt for a numeric input if a string put in, just returns to start. Cancel, null string and non-null string that won't parse to number just fail silently, offering a restart. Out of range numbers do get the range prompt and a new entry box. Might look at dropping the test for empty string as that should surely come back as Nan but I'm having trouble with logical operators using that. So on to the other imputs, which are binary choices in a series of four alerts or a set of four boxes in one alert. Not quite catching invalid string input = still outputs pwd.
 
   n = parseInt(length);
-  console.log(n)
-
-  // if (n != 8) console.log("NAN or not " + n);
-  // if (length = null) return; // Not really what I want...
  
   if ((n <=7 ) || (n >= 129)) { alert("Please enter a number between 8 and 128.") ; getPasswordOptions()};
-
-
-// Need to pseudocode again... paying particualr attention to 
-
-
-
-  // Password options selectable by user are password length, between 8 and 128 characters and password character set, which must be at least one of the four above. These inputs must be validated, the length must fall in the allowed range, and at least one character set must be selected.
-  // User input can be gathered using a prompt box or boxes with explanatory text.
-  // Alerts to invalid input could be given by alert box(es).
-  // Valid input does not explicitly need confirmation according to the brief. However a "You have selected <parameters> is this OK" confirm box could be added.
-  // Keep this clean by just prompting and validating user input.
-
 
 
   useSpecial = window.confirm("Do you want your password to include special characters?" );
@@ -66,8 +46,10 @@ function getPasswordOptions() {
   useLower = window.confirm("Do you want your password to include lower case letters?" );
   useUpper = window.confirm("Do you want your password to include upper case letters?" );
 
-  // if (useSpecial || useDigits || useLower || useUpper) window.alert("valid");
-  // else window.alert("Invalid")
+// Where's my conditional test gone? At least one must be true to proceed to load the combinedArray. 
+
+ if (useSpecial || useDigits || useLower || useUpper) window.alert(`Your password will be ${n} characters long ${useDigits}`);
+  else { window.alert("You need to choose at least one type of character") ; getPasswordOptions(); }
 
   combinedArray = [];
 
@@ -80,22 +62,15 @@ function getPasswordOptions() {
   if (useUpper) combinedArray = combinedArray.concat(upperCasedCharacters);
 
 
-  // combinedArray = specialCharacters.concat(numericCharacters, lowerCasedCharacters, upperCasedCharacters)
+  
 }
 
-// let length = 12
 
-// let n = length
-
-
-// getRandomFrom(combinedArray, n)
 
 // Function for getting a random element from an array
 function getRandomFrom(arr,n) {
 
-  // This function will generate a series of pseudorandom selections from an array of the whole set of characters selected for password generation. It will take another parameter to allow it to perform the iteration locally. Local iteration means the function is not being set up and torn down repeatedly, so probably more efficient. 
-  // Return should be a clean string of the results of picking enough random items from the master array passed in.
-
+ 
   /* Pseudocode starts here
   Parameters passed to function are the (master) array and the number of characters required to make the password string. The returned parameter is the password string.
   The pseudorandom generator uses the array length to generate values from 0 (inclusive) to array length exclusive (equivalent to -1), correct for indexing.
@@ -103,7 +78,7 @@ function getRandomFrom(arr,n) {
   When n = length of password required, return the completed password string.
   */
 
-  // Clear displayed (old) password when 'generate password is pressed for second time and on.
+  // ! Clear displayed (old) password when 'generate password is pressed for second time and on.
 
   let chars = ""
   let charCount = 1
@@ -117,8 +92,8 @@ function getRandomFrom(arr,n) {
 
 // Function to generate password with user input
 function generatePassword() {
-  // Get parameters from user
-if (getPasswordOptions() == null) return;
+  // Get parameters from user 
+if (getPasswordOptions() == null) return; // ! does this do owt?
   // Build master array of allowable characters from the selected arrays.
   // Call the getRandomFrom(masterArray, n), returning a password string of length n.
 
@@ -135,11 +110,10 @@ function writePassword() { // better called start password process or something 
  
   generatePassword()
   var password = getRandomFrom(combinedArray, n)         // generatePassword();
-  // ? test code var password = "Hello"
- var passwordText = document.querySelector('#password');
+  var passwordText = document.querySelector('#password');
 
- passwordText.value = password;
- password = ""
+  passwordText.value = password;
+  password = ""
 }
 
 // Add event listener to generate button

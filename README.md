@@ -12,7 +12,7 @@ The length must be between 8 and 128 characters inclusive. The character types a
 
 ## Installation
 
-As a web application this does not require installation, it is online at github pages with the URL 
+As a web application this does not require installation, it is online at github pages with the URL https://sirlesp.github.io/password-generator-inadvisable/starter/
 
 ## Instructions
 

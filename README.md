@@ -2,69 +2,49 @@
 
 ## Overview
 
-This week’s challenge requires you to create an application that an employee can use to generate a random password based on criteria they’ve selected by modifying starter code. This app will run in the browser, and will feature dynamically updated HTML and CSS powered by JavaScript code that you write. It will have a clean and polished user interface that is responsive, ensuring that it adapts to multiple screen sizes.
+This challenge is to write a JavaScript program that prompts a user to a web page to input parameters and then generates a pseudorandom string using those parameters, which is displayed on the screen.
 
-The password can include special characters. If you’re unfamiliar with these, see this [list of Password Special Characters from the OWASP Foundation](https://www.owasp.org/index.php/Password_special_characters).
+The parameters are length of password and the types of character used for generation of the password.
+
+There are constraints on the parameters, against which they must be validated before generating output.
+
+The length must be between 8 and 128 characters inclusive. The character types are: digits, lower case letters, upper case letters and 'special characters'. A list of special characters from the OWASP foundation is referenced. Starter code includes four arrays containing the sets of allowable characters.
+
+## Installation
+
+As a web application this does not require installation, it is online at github pages with the URL 
 
 ## Instructions
 
-The following image shows the web application's appearance and functionality:
+The following image shows the web application's appearance:
 
 ![password generator demo](./assets/05-javascript-challenge-demo.png)
 
+When the Generate Password button is clicked, a series of prompts are displayed to the user, starting with password length and then selecting the classes of characters to include.
 
-* Generate a password when the button is clicked
-  * Present a series of prompts for password criteria
-    * Length of password
-      * At least 8 characters but no more than 128.
-    * Character types
-      * Lowercase
-      * Uppercase
-      * Numeric
-      * Special characters ($@%&*, etc)
-  * Code should validate for each input and at least one character type should be selected
-  * Once prompts are answered then the password should be generated and displayed in an alert or written to the page
+If the length is invalid, an alert is shown and the user returned to the start of the process.
 
-## Grading Requirements
+If no character set is selected, an alert is shown and the user returned to the start of the process.
 
-This challenge is graded based on the following criteria: 
+On successful input the password is displayed in place of the Your Password placeholder.
 
-### Technical Acceptance Criteria: 40%
+After a time period, the display is cleared automatically and returns to the placeholder.
 
-* Satisfies all of the above acceptance criteria plus the following:
+## Critique
 
-  * The challenge should not produce any errors in the console when you inspect it using Chrome DevTools.
+This password generator is *not* intended of fit for actual use. While it does produce pseudorandom passwords of a quality higher than many which people actually use, it is flawed in several ways. The pseudorandom generation method is not of a cryptographic standard and could probably be reverse engineered given sufficient examples of the passwords produced. Also if the code isn't secured on the server, reverse engineering or outright interference with the generator could be trivial. And there's local storage as well.
 
-### Deployment: 32%
+From the user perspective the 'special character' set includes some which could be difficult for general users to find on the keyboard as they are not much used outside programming. Also users generally don't like the non-memorable nature of pseudorandom strings, so this isn't a friendly type of password for them. If they are already using a password manager, then that should be generating really good passwords for them anyway...
 
-* Application deployed at live URL.
+And yet again; https://xkcd.com/936/
 
-* Application loads with no errors.
+## Learning points and future development
 
-* Application GitHub URL submitted.
+I won't be implementing password generators; I'll leave that to teams of experts!
 
-* GitHub repository that contains application code.
+I have gained more experience in JavaScript array handling, flow control and the wonders of testing for the NaN value... there are residual slight bugs which I think are flow control problems, none showstoppers.
 
-### Application Quality: 15%
-
-* Application user experience is intuitive and easy to navigate.
-
-* Application user interface style is clean and polished.
-
-* Application resembles the mock-up functionality provided in the challenge instructions.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality README file with description, screenshot, and link to deployed application.
-
+I also now really dislike the restrictions of JavaScript prompts, alerts and confirms. The select the character set(s) stage in particular would be much easier with tick boxes... it is one decision with multiple options, not a series of independent options. I look forward to learning more about better methods soon.
 
 ## Review
 

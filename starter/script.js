@@ -24,22 +24,18 @@ let n = 8 // default minimum length for password
 let combinedArray = [] ;
 
 
-// Function to prompt user for password options
+// Function to prompt user for password options 
 function getPasswordOptions() {
 
   length = window.prompt("How long do you want your password to be?", "Enter a number between 8 and 128");
 
   // Need to catch cancel 
-  if (length == null) ;
+  if (length == null);
 
-   // ! Bashed very roughly into shape! Doesn't do anything too stupid but not quite right - doesn't prompt for a numeric input if a string put in, just returns to start. Cancel, null string and non-null string that won't parse to number just fail silently, offering a restart. Out of range numbers do get the range prompt and a new entry box. Might look at dropping the test for empty string as that should surely come back as Nan but I'm having trouble with logical operators using that. So on to the other imputs, which are binary choices in a series of four alerts or a set of four boxes in one alert. Not quite catching invalid string input = still outputs pwd.
-
-// console.log(length)
   n = parseInt(length);
-//  console.log(n)
-//  if (isNaN(n)) console.log(`n = Nan is truthy ${n}`)
+
   if ((n <=7 ) || (n >= 129) || (isNaN(n))) { alert("Please enter a number between 8 and 128.") ; return};
-  // Not catching NaN. Apparently NaN is of type "number"
+  
 
 
   useSpecial = window.confirm("Do you want your password to include special characters?" );
@@ -48,7 +44,7 @@ function getPasswordOptions() {
   useUpper = window.confirm("Do you want your password to include upper case letters?" );
 
 
- if (useSpecial || useDigits || useLower || useUpper) window.alert(`Your password will be ${n} characters long ${useDigits}`);
+ if (useSpecial || useDigits || useLower || useUpper) window.alert(`Your password will be ${n} characters long.`);
   else { window.alert("You need to choose at least one type of character") ; getPasswordOptions(); }
 
   combinedArray = [];
@@ -65,20 +61,8 @@ function getPasswordOptions() {
   
 }
 
-
-
-// Function for getting a random element from an array
+// Function for getting a pseudorandom string of length n from an array of characters
 function getRandomFrom(arr,n) {
-
- 
-  /* Pseudocode starts here
-  Parameters passed to function are the (master) array and the number of characters required to make the password string. The returned parameter is the password string.
-  The pseudorandom generator uses the array length to generate values from 0 (inclusive) to array length exclusive (equivalent to -1), correct for indexing.
-  The generator is called n times, the resulting characters being concatenated one by one onto the end of a string.
-  When n = length of password required, return the completed password string.
-  */
-
-  // ! Clear displayed (old) password when 'generate password is pressed for second time and on.
 
   let chars = ""
   let charCount = 1
@@ -88,28 +72,19 @@ function getRandomFrom(arr,n) {
     ++charCount
   }
   return chars
-}
-
-// Function to generate password with user input
-function generatePassword() {
-  // Get parameters from user 
-getPasswordOptions()
-  // Build master array of allowable characters from the selected arrays.
-  // Call the getRandomFrom(masterArray, n), returning a password string of length n.
-
- 
-
 
 }
+
+// Main code 
 
 //  Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 
-// Write password to the #password input (surely output?)
-function writePassword() { // better called start password process or something - not really just a write
+// Write password to the #password output field
+function writePassword() { 
  
-  generatePassword()
-  var password = getRandomFrom(combinedArray, n)         // generatePassword();
+  getPasswordOptions()
+  var password = getRandomFrom(combinedArray, n)         
   var passwordText = document.querySelector('#password');
 
   passwordText.value = password;
@@ -117,4 +92,4 @@ function writePassword() { // better called start password process or something 
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener('click', writePassword); // Javascript triggered here,and only here.
+generateBtn.addEventListener('click', writePassword); 

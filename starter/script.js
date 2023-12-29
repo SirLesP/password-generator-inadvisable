@@ -29,16 +29,17 @@ function getPasswordOptions() {
 
   length = window.prompt("How long do you want your password to be?", "Enter a number between 8 and 128");
 
-  // if (length === "") console.log("empty string " + n); // The third value...
-  // if (length === null) console.log("null " + n); 
-  // Check input validity - null on escape, string on input or default and OK . What on empty string?? Looks like a valid, but empty, string...
-  // if (length == null) console.log("null");
+  // Need to catch cancel 
+  if (length == null) ;
 
    // ! Bashed very roughly into shape! Doesn't do anything too stupid but not quite right - doesn't prompt for a numeric input if a string put in, just returns to start. Cancel, null string and non-null string that won't parse to number just fail silently, offering a restart. Out of range numbers do get the range prompt and a new entry box. Might look at dropping the test for empty string as that should surely come back as Nan but I'm having trouble with logical operators using that. So on to the other imputs, which are binary choices in a series of four alerts or a set of four boxes in one alert. Not quite catching invalid string input = still outputs pwd.
 
+// console.log(length)
   n = parseInt(length);
- 
-  if ((n <=7 ) || (n >= 129)) { alert("Please enter a number between 8 and 128.") ; getPasswordOptions()};
+//  console.log(n)
+//  if (isNaN(n)) console.log(`n = Nan is truthy ${n}`)
+  if ((n <=7 ) || (n >= 129) || (isNaN(n))) { alert("Please enter a number between 8 and 128.") ; return};
+  // Not catching NaN. Apparently NaN is of type "number"
 
 
   useSpecial = window.confirm("Do you want your password to include special characters?" );
@@ -46,7 +47,6 @@ function getPasswordOptions() {
   useLower = window.confirm("Do you want your password to include lower case letters?" );
   useUpper = window.confirm("Do you want your password to include upper case letters?" );
 
-// Where's my conditional test gone? At least one must be true to proceed to load the combinedArray. 
 
  if (useSpecial || useDigits || useLower || useUpper) window.alert(`Your password will be ${n} characters long ${useDigits}`);
   else { window.alert("You need to choose at least one type of character") ; getPasswordOptions(); }
@@ -93,12 +93,12 @@ function getRandomFrom(arr,n) {
 // Function to generate password with user input
 function generatePassword() {
   // Get parameters from user 
-if (getPasswordOptions() == null) return; // ! does this do owt?
+getPasswordOptions()
   // Build master array of allowable characters from the selected arrays.
   // Call the getRandomFrom(masterArray, n), returning a password string of length n.
 
  
-  // * Pseudocode starts here
+
 
 }
 
